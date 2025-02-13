@@ -1,8 +1,8 @@
 import { MessagesSquare } from "lucide-react"
 
-const Logo = () => {
+const Logo = ({className}:{className? : string}) => {
   return (
-    <div className="flex gap-2 items-center ">
+    <div className={`flex gap-2 items-center ${className}`}>
       <MessagesSquare />
       <p className="text-lg">TrueEcho</p>
     </div>
