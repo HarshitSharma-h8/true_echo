@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom"
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import SignInUpLayout from "../Components/SignInUpLayout/SignInUpLayout";
 import Input from "../Components/Input/Input";
 import Button from "../Components/Button/Button";
@@ -11,6 +11,7 @@ const AuthPage = () => {
   const [welcomeMessage, setWelcomeMessage] = useState("");
   const [welcomeText, setWelcomeText] = useState("");
   const [signinBtn, setSigninBtn] = useState("Get Started");
+  const [signunBtn, setSignunBtn] = useState("Register");
 
   const location = useLocation();
   const path = location.pathname;
@@ -45,24 +46,60 @@ const AuthPage = () => {
           onChange={() => {}}
           className=""
         />
-        <div className="text-right mt-2 text-blue-500  hover:text-blue-600 transition cursor-pointer">
+        <Link to={'/forgot-password'} className="text-right  block mt-2 text-blue-500  hover:text-blue-600 transition cursor-pointer">
           Forgot password?
-        </div>
+        </Link>
         <Button label={signinBtn} className="mt-4 w-full" />
         <p className="text-center mt-4">
           Don't have an account?{" "}
-          <span className="text-blue-500  hover:text-blue-600 transition cursor-pointer">
+          <Link to={'/signup'} className="text-blue-500  hover:text-blue-600 transition cursor-pointer">
             Sign Up
-          </span>
+          </Link>
         </p>
-        <p className="text-center mt-4">Or With</p>
+        <p className="text-center mt-2 mb-2">Or With</p>
 
-        <GoogleButton/>
+        <GoogleButton label="Sign in"/>
       </form>
     </SignInUpLayout>
   ) : (
     <SignInUpLayout welcomeMessage={welcomeMessage} welcomeText={welcomeText}>
-      <h1>Arpit</h1>
+      <form>
+        <Input
+          label="Username"
+          type="text"
+          value=""
+          placeholder="Enter you email/username"
+          onChange={() => {}}
+          className=""
+        />
+        <Input
+          label="Email"
+          type="text"
+          value=""
+          placeholder="Enter you email/username"
+          onChange={() => {}}
+          className=""
+        />
+        <Input
+          label="Password"
+          type="password"
+          value=""
+          placeholder="Enter your password"
+          onChange={() => {}}
+          className=""
+        />
+        
+        <Button label={signunBtn} className="mt-6 w-full" />
+        <p className="text-center mt-4">
+          Don't have an account?{" "}
+          <Link to={'/signin'} className="text-blue-500  hover:text-blue-600 transition cursor-pointer">
+            Sign In
+          </Link>
+        </p>
+        <p className="text-center mt-2 mb-2">Or With</p>
+
+        <GoogleButton label="Sign up"/>
+      </form>
     </SignInUpLayout>
   );
 };

@@ -1,31 +1,33 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { useAppSelector } from "./Store/Hook";
-import Header from "./Components/Header/Header";
-import Footer from "./Components/Footer/Footer";
+import LayoutWithHeaderFooter from "./Components/Layout/LayoutWithHeaderFooter";
+import PageNotFound from "./Pages/PageNotFound";
 
 const Home = React.lazy(() => import("./Pages/Home"));
 const AuthPage = React.lazy(() => import("./Pages/AuthPage"));
+const ForgotPassword = React.lazy(() => import("./Pages/ForgotPassword"));
+const VerifyOTP = React.lazy(() => import("./Pages/VerifyOTP"));
+const ResetPassword = React.lazy(() => import("./Pages/ResetPassword"));
 
-function AppLayout() {
+function App() {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
-  const location = useLocation();
+  // const location = useLocation();
 
-  const showHeaderFooter = !["/signup", "/signin"].includes(location.pathname);
+  // const showHeaderFooter = !["/signup", "/signin", "/forgot-password", "/verify-otp", "/reset-password", "*"].includes(location.pathname);
 
   return (
     <>
-        {showHeaderFooter && <Header />}
+      <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<Home />} />
-            {/* Private routes */}
-            <Route
-              path="/abc"
-              element={isAuthenticated ? <>Harshit</> : <>User</>}
-            />
+            {/* Routes with Header and Footer */}
+            <Route element={<LayoutWithHeaderFooter />}>
+              <Route path="/" element={<Home />} />
+            </Route>
+
+            {/* Routes without Header and Footer */}
             <Route
               path="/signin"
               element={isAuthenticated ? <Home /> : <AuthPage />}
@@ -34,18 +36,24 @@ function AppLayout() {
               path="/signup"
               element={isAuthenticated ? <Home /> : <AuthPage />}
             />
+            <Route
+              path="/forgot-password"
+              element={isAuthenticated ? <Home /> : <ForgotPassword />}
+            />
+            <Route
+              path="/verify-otp"
+              element={isAuthenticated ? <Home /> : <VerifyOTP />}
+            />
+            <Route
+              path="/reset-password"
+              element={isAuthenticated ? <Home /> : <ResetPassword />}
+            />
+            {/* Catch-all route for undefined paths */}
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </Suspense>
-        {showHeaderFooter && <Footer />}
+      </BrowserRouter>
     </>
-  );
-}
-
-function App() {
-  return (
-    <BrowserRouter>
-      <AppLayout />
-    </BrowserRouter>
   );
 }
 

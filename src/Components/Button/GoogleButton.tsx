@@ -15,10 +15,10 @@ const GoogleButton: React.FC<GoogleButtonProps> = ({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`flex gap-2 items-center justify-center w-full max-w-sm px-4 py-4   shadow hover:shadow-gray-300 rounded-md bg-white text-gray-700  transition disabled:bg-gray-200 cursor-pointer`}
+      className={`flex gap-2 items-center justify-center w-full max-w-sm px-4 py-4 border border-gray-200  shadow hover:shadow-gray-300 rounded-md bg-white text-gray-700  transition disabled:bg-gray-200 cursor-pointer`}
     >
       <GoogleIcon  />
-      <span>{label}</span>
+      <span>{label} with Google</span>
     </button>
   );
 };
