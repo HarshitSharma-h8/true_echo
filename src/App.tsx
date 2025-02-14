@@ -4,6 +4,7 @@ import "./App.css";
 import { useAppSelector } from "./Store/Hook";
 import LayoutWithHeaderFooter from "./Components/Layout/LayoutWithHeaderFooter";
 import PageNotFound from "./Pages/PageNotFound";
+import Dashboard from "./Pages/Dashboard";
 
 const Home = React.lazy(() => import("./Pages/Home"));
 const AuthPage = React.lazy(() => import("./Pages/AuthPage"));
@@ -28,6 +29,8 @@ function App() {
             </Route>
 
             {/* Routes without Header and Footer */}
+
+            {/* Authenticatin routes */}
             <Route
               path="/signin"
               element={isAuthenticated ? <Home /> : <AuthPage />}
@@ -47,6 +50,12 @@ function App() {
             <Route
               path="/reset-password"
               element={isAuthenticated ? <Home /> : <ResetPassword />}
+            />
+
+            {/* Dashboard Routes */}
+            <Route
+              path="/dashboard"
+              element={!isAuthenticated ? <Home /> : <Dashboard />}
             />
             {/* Catch-all route for undefined paths */}
             <Route path="*" element={<PageNotFound />} />

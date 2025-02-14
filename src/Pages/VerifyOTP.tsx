@@ -8,7 +8,7 @@ const VerifyOTP = () => {
     "Your code was sent to you via email"
   );
   const [welcomeText, setWelcomeText] = useState("OTP Verification");
-  const [buttonTxt, setButtonTxt] = useState("Send Email");
+  const [buttonTxt, setButtonTxt] = useState("Verify");
 
   const [otp, setOtp] = useState("");
 

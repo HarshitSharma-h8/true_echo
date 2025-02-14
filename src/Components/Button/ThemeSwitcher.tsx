@@ -1,4 +1,4 @@
-import { Monitor, MoonStar, Sun } from "lucide-react";
+import {  MoonStar, Sun } from "lucide-react";
 import { useTheme } from "../../Hooks/useTheme"
 
 const ThemeSwitcher:React.FC = () => {
@@ -9,17 +9,17 @@ const ThemeSwitcher:React.FC = () => {
         setTheme(newTheme);
     }
   return (
-    <div className="bg-gray-700 flex items-center gap-3 px-3 py-2 rounded-full ">
-      <button onClick={()=>handelThemeChange('dark')} className="text-green-500 cursor-pointer hover:scale-105 transition duration-300 ease-in-out">
-      <MoonStar />
+    <span className="bg-black dark:bg-white inline-flex items-center justify-between gap-2 px-1 py-1 rounded-full ">
+      <button onClick={()=>handelThemeChange('dark')} className={` cursor-pointer  transition-all duration-300 ease-in-out rounded-full p-1 ${theme === 'dark' ? 'bg-primary text-white' : 'text-white'}`}>
+      <MoonStar size={16}/>
       </button>
-      <button onClick={()=>handelThemeChange('system')} className="text-green-500 cursor-pointer hover:scale-105 transition duration-300 ease-in-out">
-      <Monitor />
+      {/* <button onClick={()=>handelThemeChange('system')} className={`text-white dark:text-black cursor-pointer hover:scale-105 transition duration-300 ease-in-out rounded-full p-2 ${theme === 'system' ? 'bg-primary text-white' : 'text-black'}`}>
+      <Monitor size={18}/>
+      </button> */}
+      <button onClick={()=>handelThemeChange('light')} className={`text-white dark:text-black cursor-pointer  transition-all duration-300 ease-in-out rounded-full p-1 ${theme === 'light' ? 'bg-primary text-white' : 'text-black'}`}>
+      <Sun size={16}/>
       </button>
-      <button onClick={()=>handelThemeChange('light')} className="text-green-500 cursor-pointer hover:scale-105 transition duration-300 ease-in-out">
-      <Sun />
-      </button>
-    </div>
+    </span>
   )
 }
 

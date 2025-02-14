@@ -6,7 +6,7 @@ export interface authState {
 }
 
 const initialState : authState = {
-    isAuthenticated : false,
+    isAuthenticated : true,
     userData : null
 }
 
